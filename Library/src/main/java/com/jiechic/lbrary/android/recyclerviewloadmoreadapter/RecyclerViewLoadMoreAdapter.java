@@ -11,6 +11,7 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     private static final int TYPE_LOADMORE = Integer.MIN_VALUE;
     private static final int TYPE_ADAPTEE_OFFSET = 2;
     private boolean canLoadMore = false;
+    private LoadMoreViewHolder loadMoreHolder;
 
 
     @Override
@@ -24,7 +25,8 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position == getContentItemCount() && holder.getItemViewType() == TYPE_LOADMORE) {
-            onBindLoadMoreItemView(holder, position);
+            onBindLoadMoreItemView((LoadMoreViewHolder)holder, position);
+            loadMoreHolder=(LoadMoreViewHolder)holder;
         } else {
             onBindContentItemView(holder, position);
         }
@@ -32,7 +34,6 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-
         if (position == getContentItemCount() && canLoadMore) {
             return TYPE_LOADMORE;
         }
@@ -63,5 +64,6 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
 
     public abstract RecyclerView.ViewHolder onCreateLoadMoreItemViewHolder(ViewGroup parent, int viewType);//创建你要的普通item
 
-    public abstract void onBindLoadMoreItemView(RecyclerView.ViewHolder holder, int position);//绑定数据
+    public abstract void onBindLoadMoreItemView(LoadMoreViewHolder holder, int position);//绑定数据
+
 }
