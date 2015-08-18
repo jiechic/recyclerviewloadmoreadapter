@@ -9,25 +9,33 @@ import android.view.View;
 public abstract class LoadMoreViewHolder extends RecyclerView.ViewHolder {
 
     private OnLoadListener loadListener;
+    private boolean isLoad = false;
 
     public LoadMoreViewHolder(View itemView) {
         super(itemView);
     }
 
-    protected interface OnLoadListener{
+    protected interface OnLoadListener {
         void onLoad();
     }
 
-    protected void loadMore(){
-        if (loadListener!=null){
+    protected void loadMore() {
+        if (!isLoad && loadListener != null) {
             loadListener.onLoad();
+            isLoad = true;
         }
+
     }
 
-    protected abstract void loadComplete();
+    public void loadComplete() {
+        isLoad=false;
+        onLoadComplete();
+    }
 
-    protected void setLoadListener(OnLoadListener loadListener){
-        this.loadListener=loadListener;
+    protected abstract void onLoadComplete();
+
+    protected void setLoadListener(OnLoadListener loadListener) {
+        this.loadListener = loadListener;
     }
 
 }

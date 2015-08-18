@@ -1,22 +1,26 @@
 package com.jiechic.lbrary.android.recyclerviewloadmoreadapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 /**
  * Created by <a href="http://www.jiechic.com" target="_blank">jiechic</a> on 15/8/17.
  */
-public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>{
+public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     private static final int TYPE_LOADMORE = Integer.MIN_VALUE;
     private static final int TYPE_ADAPTEE_OFFSET = 2;
     private boolean canLoadMore = false;
     private LoadMoreViewHolder loadMoreHolder;
     private OnLoadListener listener;
-    private LoadMoreViewHolder.OnLoadListener viewHolderListener=new LoadMoreViewHolder.OnLoadListener() {
+    private LoadMoreViewHolder.OnLoadListener viewHolderListener = new LoadMoreViewHolder.OnLoadListener() {
         @Override
         public void onLoad() {
-            if (listener!=null){
+            if (listener != null) {
                 listener.onLoad();
             }
         }
@@ -26,7 +30,7 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_LOADMORE) {
-            return onCreateLoadMoreItemViewHolder(parent, viewType);
+            return (VH) onCreateLoadMoreItemViewHolder(parent, viewType);
         }
         return onCreateContentItemViewHolder(parent, viewType - TYPE_ADAPTEE_OFFSET);
     }
@@ -34,11 +38,11 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(VH holder, int position) {
         if (position == getContentItemCount() && holder.getItemViewType() == TYPE_LOADMORE) {
-            onBindLoadMoreItemView((LoadMoreViewHolder)holder, position);
-            loadMoreHolder=(LoadMoreViewHolder)holder;
+            onBindLoadMoreItemView((LoadMoreViewHolder) holder, position);
+            loadMoreHolder = (LoadMoreViewHolder) holder;
             loadMoreHolder.setLoadListener(viewHolderListener);
         } else {
-            onBindContentItemView((VH)holder, position);
+            onBindContentItemView((VH) holder, position);
         }
     }
 
@@ -59,7 +63,7 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
         return itemCount;
     }
 
-    public void setCanLoadMore(boolean canLoadMore){
+    public void setCanLoadMore(boolean canLoadMore) {
         this.canLoadMore = canLoadMore;
         notifyDataSetChanged();
     }
@@ -72,22 +76,55 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
 
     public abstract int getContentItemType(int position);//没用到，返回0即可，为了扩展用的
 
-    public abstract VH onCreateLoadMoreItemViewHolder(ViewGroup parent, int viewType);//创建你要的普通item
+    public LoadMoreViewHolder onCreateLoadMoreItemViewHolder(ViewGroup parent, int viewType)//创建你要的普通item
+    {
+        return new LoadViewHolder(LayoutInflater.from(parent.getContext()).inflate(LoadViewHolder.LAYOUT_ID, parent, false));
+    }
 
-    public abstract void onBindLoadMoreItemView(LoadMoreViewHolder holder, int position);//绑定数据
+    public void onBindLoadMoreItemView(LoadMoreViewHolder holder, int position)//绑定数据
+    {
 
-    public void loadComplete(){
-        if (loadMoreHolder!=null){
+    }
+
+    public void loadComplete() {
+        if (loadMoreHolder != null) {
             loadMoreHolder.loadComplete();
         }
     }
 
-    public interface OnLoadListener{
+    public interface OnLoadListener {
         void onLoad();
     }
 
-    public void setOnLoadListener(OnLoadListener listener){
-        this.listener=listener;
+    public void setOnLoadListener(OnLoadListener listener) {
+        this.listener = listener;
+    }
+
+
+    public static class LoadViewHolder extends LoadMoreViewHolder {
+
+        public static final int LAYOUT_ID = R.layout.adapter_loadmore_item;
+        Button button;
+        ProgressBar progressbar;
+
+        public LoadViewHolder(View itemView) {
+            super(itemView);
+            button = (Button) itemView.findViewById(R.id.button);
+            progressbar = (ProgressBar) itemView.findViewById(R.id.progressbar);
+            button.setOnClickListener((View v) -> {
+                loadMore();
+                button.setVisibility(View.GONE);
+                progressbar.setVisibility(View.VISIBLE);
+            });
+            button.setVisibility(View.VISIBLE);
+            progressbar.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onLoadComplete() {
+            button.setVisibility(View.VISIBLE);
+            progressbar.setVisibility(View.GONE);
+        }
     }
 
 }
