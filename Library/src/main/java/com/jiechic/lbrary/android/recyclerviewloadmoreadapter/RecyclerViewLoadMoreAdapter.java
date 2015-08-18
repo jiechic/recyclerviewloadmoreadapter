@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 /**
  * Created by <a href="http://www.jiechic.com" target="_blank">jiechic</a> on 15/8/17.
  */
-public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>{
 
     private static final int TYPE_LOADMORE = Integer.MIN_VALUE;
     private static final int TYPE_ADAPTEE_OFFSET = 2;
@@ -32,7 +32,7 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(VH holder, int position) {
         if (position == getContentItemCount() && holder.getItemViewType() == TYPE_LOADMORE) {
             onBindLoadMoreItemView((LoadMoreViewHolder)holder, position);
             loadMoreHolder=(LoadMoreViewHolder)holder;
