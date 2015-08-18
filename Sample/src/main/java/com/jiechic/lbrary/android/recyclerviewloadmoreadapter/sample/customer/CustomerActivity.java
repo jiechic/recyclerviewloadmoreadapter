@@ -17,7 +17,7 @@ public class CustomerActivity extends ActionBarActivity {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
-//    Adapter adapter = new Adapter(myDataset);
+    CustomerAdapter adapter = new CustomerAdapter(myDataset);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,8 @@ public class CustomerActivity extends ActionBarActivity {
         ButterKnife.bind(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//        recyclerView.setAdapter(adapter);
-//        adapter.setCanLoadMore(true);
+        recyclerView.setAdapter(adapter);
+        adapter.setCanLoadMore(true);
 
 
         myDataset.add("aa");
@@ -45,7 +45,11 @@ public class CustomerActivity extends ActionBarActivity {
         myDataset.add("aa");
         myDataset.add("aa");
         myDataset.add("aa");
-//        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
+        adapter.setOnLoadListener(() -> recyclerView.postDelayed(() -> {
+            onLoadMore();
+            adapter.loadComplete();
+        }, 2000));
 
     }
 
@@ -69,12 +73,11 @@ public class CustomerActivity extends ActionBarActivity {
             myDataset.add("ccccc");
             myDataset.add("ccccc");
             myDataset.add("ccccc");
-//            adapter.setCanLoadMore(true);
+            adapter.setCanLoadMore(true);
         } else {
-//            adapter.setCanLoadMore(false);
+            adapter.setCanLoadMore(false);
         }
-
-//        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
 }
