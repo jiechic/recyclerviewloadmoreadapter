@@ -26,4 +26,8 @@ public abstract class LoadMoreViewHolder extends RecyclerView.ViewHolder {
 
     protected abstract void loadComplete();
 
+    protected void setLoadListener(OnLoadListener loadListener){
+        this.loadListener=loadListener;
+    }
+
 }
