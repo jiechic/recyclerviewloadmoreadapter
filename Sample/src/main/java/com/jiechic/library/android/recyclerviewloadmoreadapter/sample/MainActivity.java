@@ -1,4 +1,4 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample;
+package com.jiechic.library.android.recyclerviewloadmoreadapter.sample;
 
 import android.content.Intent;
 import android.os.Bundle;

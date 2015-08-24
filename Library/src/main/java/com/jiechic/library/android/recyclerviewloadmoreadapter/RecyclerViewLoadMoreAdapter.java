@@ -1,4 +1,4 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter;
+package com.jiechic.library.android.recyclerviewloadmoreadapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -103,14 +103,14 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
 
     public static class LoadViewHolder extends LoadMoreViewHolder {
 
-        public static final int LAYOUT_ID = R.layout.adapter_loadmore_item;
+        public static final int LAYOUT_ID = com.jiechic.library.android.recyclerviewloadmoreadapter.R.layout.adapter_loadmore_item;
         Button button;
         ProgressBar progressbar;
 
         public LoadViewHolder(View itemView) {
             super(itemView);
-            button = (Button) itemView.findViewById(R.id.button);
-            progressbar = (ProgressBar) itemView.findViewById(R.id.progressbar);
+            button = (Button) itemView.findViewById(com.jiechic.library.android.recyclerviewloadmoreadapter.R.id.button);
+            progressbar = (ProgressBar) itemView.findViewById(com.jiechic.library.android.recyclerviewloadmoreadapter.R.id.progressbar);
             button.setOnClickListener((View v) -> {
                 loadMore();
                 button.setVisibility(View.GONE);

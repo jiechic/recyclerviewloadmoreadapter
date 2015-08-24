@@ -1,11 +1,11 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample.defaultEffect;
+package com.jiechic.library.android.recyclerviewloadmoreadapter.sample.defaultEffect;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.jiechic.lbrary.android.recyclerviewloadmoreadapter.RecyclerViewLoadMoreAdapter;
+import com.jiechic.library.android.recyclerviewloadmoreadapter.RecyclerViewLoadMoreAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

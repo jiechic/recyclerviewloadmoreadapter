@@ -1,4 +1,4 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample.customer;
+package com.jiechic.library.android.recyclerviewloadmoreadapter.sample.customer;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

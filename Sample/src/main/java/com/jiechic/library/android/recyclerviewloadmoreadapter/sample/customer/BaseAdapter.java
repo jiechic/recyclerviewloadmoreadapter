@@ -1,4 +1,4 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample.customer;
+package com.jiechic.library.android.recyclerviewloadmoreadapter.sample.customer;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.jiechic.lbrary.android.recyclerviewloadmoreadapter.LoadMoreViewHolder;
-import com.jiechic.lbrary.android.recyclerviewloadmoreadapter.RecyclerViewLoadMoreAdapter;
-import com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample.R;
+import com.jiechic.library.android.recyclerviewloadmoreadapter.LoadMoreViewHolder;
+import com.jiechic.library.android.recyclerviewloadmoreadapter.RecyclerViewLoadMoreAdapter;
+import com.jiechic.library.android.recyclerviewloadmoreadapter.sample.R;
 
 /**
  * Created by <a href="http://www.jiechic.com" target="_blank">jiechic</a> on 15/8/18.

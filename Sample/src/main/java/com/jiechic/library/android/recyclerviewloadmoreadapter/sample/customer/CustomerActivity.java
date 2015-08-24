@@ -1,4 +1,4 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample.defaultEffect;
+package com.jiechic.library.android.recyclerviewloadmoreadapter.sample.customer;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -6,18 +6,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.jiechic.lbrary.android.recyclerviewloadmoreadapter.sample.R;
+import com.jiechic.library.android.recyclerviewloadmoreadapter.sample.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DefaultActivity extends ActionBarActivity {
+public class CustomerActivity extends ActionBarActivity {
     List<String> myDataset = new ArrayList<>();
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    DefaultAdapter adapter = new DefaultAdapter(myDataset);
+    CustomerAdapter adapter = new CustomerAdapter(myDataset);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class DefaultActivity extends ActionBarActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         adapter.setCanLoadMore(true);
+
 
         myDataset.add("aa");
         myDataset.add("aa");
@@ -52,8 +53,8 @@ public class DefaultActivity extends ActionBarActivity {
 
     }
 
-
     private void onLoadMore() {
+
 
         if (myDataset.size() < 50) {
             myDataset.add("ccccc");
@@ -76,7 +77,6 @@ public class DefaultActivity extends ActionBarActivity {
         } else {
             adapter.setCanLoadMore(false);
         }
-
         adapter.notifyDataSetChanged();
     }
 

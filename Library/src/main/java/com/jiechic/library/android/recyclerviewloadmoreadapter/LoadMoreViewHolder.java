@@ -1,4 +1,4 @@
-package com.jiechic.lbrary.android.recyclerviewloadmoreadapter;
+package com.jiechic.library.android.recyclerviewloadmoreadapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
