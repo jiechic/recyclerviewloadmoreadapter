@@ -15,9 +15,9 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     private static final int TYPE_LOADMORE = Integer.MIN_VALUE;
     private static final int TYPE_ADAPTEE_OFFSET = 2;
     private boolean canLoadMore = false;
-    private LoadMoreViewHolder loadMoreHolder;
+    private MoreViewHolder loadMoreHolder;
     private OnLoadListener listener;
-    private LoadMoreViewHolder.OnLoadListener viewHolderListener = new LoadMoreViewHolder.OnLoadListener() {
+    protected MoreViewHolder.OnLoadListener viewHolderListener = new MoreViewHolder.OnLoadListener() {
         @Override
         public void onLoad() {
             if (listener != null) {
@@ -38,8 +38,8 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(VH holder, int position) {
         if (position == getContentItemCount() && holder.getItemViewType() == TYPE_LOADMORE) {
-            onBindLoadMoreItemView((LoadMoreViewHolder) holder, position);
-            loadMoreHolder = (LoadMoreViewHolder) holder;
+            onBindLoadMoreItemView((MoreViewHolder) holder, position);
+            loadMoreHolder = (MoreViewHolder) holder;
             loadMoreHolder.setLoadListener(viewHolderListener);
         } else {
             onBindContentItemView((VH) holder, position);
@@ -76,12 +76,14 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
 
     public abstract int getContentItemType(int position);//没用到，返回0即可，为了扩展用的
 
-    public LoadMoreViewHolder onCreateLoadMoreItemViewHolder(ViewGroup parent, int viewType)//创建你要的普通item
+    public MoreViewHolder onCreateLoadMoreItemViewHolder(ViewGroup parent, int viewType)//创建你要的普通item
     {
-        return new LoadViewHolder(LayoutInflater.from(parent.getContext()).inflate(LoadViewHolder.LAYOUT_ID, parent, false));
+        MoreViewHolder holder=new LoadViewHolder(LayoutInflater.from(parent.getContext()).inflate(LoadViewHolder.LAYOUT_ID, parent, false));
+        holder.setLoadListener(viewHolderListener);
+        return holder;
     }
 
-    public void onBindLoadMoreItemView(LoadMoreViewHolder holder, int position)//绑定数据
+    public void onBindLoadMoreItemView(MoreViewHolder holder, int position)//绑定数据
     {
 
     }
@@ -101,7 +103,7 @@ public abstract class RecyclerViewLoadMoreAdapter<VH extends RecyclerView.ViewHo
     }
 
 
-    public static class LoadViewHolder extends LoadMoreViewHolder {
+    public static class LoadViewHolder extends MoreViewHolder {
 
         public static final int LAYOUT_ID = com.jiechic.library.android.recyclerviewloadmoreadapter.R.layout.adapter_loadmore_item;
         Button button;

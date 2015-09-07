@@ -6,12 +6,12 @@ import android.view.View;
 /**
  * Created by <a href="http://www.jiechic.com" target="_blank">jiechic</a> on 15/8/17.
  */
-public abstract class LoadMoreViewHolder extends RecyclerView.ViewHolder {
+public abstract class MoreViewHolder extends RecyclerView.ViewHolder {
 
     private OnLoadListener loadListener;
     private boolean isLoad = false;
 
-    public LoadMoreViewHolder(View itemView) {
+    public MoreViewHolder(View itemView) {
         super(itemView);
     }
 
@@ -34,7 +34,7 @@ public abstract class LoadMoreViewHolder extends RecyclerView.ViewHolder {
 
     protected abstract void onLoadComplete();
 
-    protected void setLoadListener(OnLoadListener loadListener) {
+    public void setLoadListener(OnLoadListener loadListener) {
         this.loadListener = loadListener;
     }
 
